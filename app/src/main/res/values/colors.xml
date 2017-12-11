@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="white" >#fff</color>
+    <color name="gery">#FAFAFA</color>
+
+    <!--RefreshLayout-->
+    <color name="refresh_progress_1">#536DFE</color>
+    <color name="refresh_progress_2">#f44336</color>
+    <color name="refresh_progress_3">#FF4081</color>
+
+    <color name="black">#252525</color>
+    <!--Splash-->
+    <color name="darkgery">#797979</color>
+    <color name="trangery">#512e2e2e</color>
+
+    <color name="textColor">#424242</color>
+
+    <!--TabLayout-->
+    <color name="TabTextColor">#FFFFFF</color>
+    <color name="TabSelectColor">#FAFAFA</color>
+    <color name="TabIndicatorColor">#FFFFFF</color>
+
+
+
+</resources>
