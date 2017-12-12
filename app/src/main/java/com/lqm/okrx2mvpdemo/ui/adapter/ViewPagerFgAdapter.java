@@ -10,9 +10,8 @@ import com.lqm.okrx2mvpdemo.ui.base.BaseFragment;
 import java.util.List;
 
 /**
- * Created by Werb on 2016/8/2.
- * Werb is Wanbo.
- * Contact Me : werbhelius@gmail.com
+ * autour: lqm
+ * desc: ViewPager Adapter
  */
 public class ViewPagerFgAdapter extends FragmentPagerAdapter {
 
@@ -52,13 +51,13 @@ public class ViewPagerFgAdapter extends FragmentPagerAdapter {
         if (tag.equals("main_view_pager")) {
             switch (position) {
                 case 0:
-                    return "知乎";
+                    return "微信文章";
                 case 1:
                     return "知乎";
                 case 2:
-                    return "知乎";
+                    return "新闻";
                 case 3:
-                    return "知乎";
+                    return "笑话";
             }
         }
         return null;

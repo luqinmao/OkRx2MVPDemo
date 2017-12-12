@@ -30,7 +30,7 @@ public class ZhihuFragment extends BaseFragment<IZhihuFgView,ZhihuFgPresenter> i
 
     @Override
     protected int createViewLayoutId() {
-        return R.layout.fragment_zhihu;
+        return R.layout.frag_zhihu;
     }
 
     @Override

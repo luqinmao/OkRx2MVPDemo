@@ -11,6 +11,7 @@ import com.lqm.okrx2mvpdemo.ui.adapter.ViewPagerFgAdapter;
 import com.lqm.okrx2mvpdemo.ui.base.BaseActivity;
 import com.lqm.okrx2mvpdemo.ui.base.BaseFragment;
 import com.lqm.okrx2mvpdemo.ui.base.BasePresenter;
+import com.lqm.okrx2mvpdemo.ui.fragment.NewsFragment;
 import com.lqm.okrx2mvpdemo.ui.fragment.ZhihuFragment;
 
 import java.util.ArrayList;
@@ -48,7 +49,7 @@ public class MainActivity extends BaseActivity {
         fragmentList = new ArrayList<>();
         fragmentList.add(new ZhihuFragment());
         fragmentList.add(new ZhihuFragment());
-        fragmentList.add(new ZhihuFragment());
+        fragmentList.add(new NewsFragment());
         fragmentList.add(new ZhihuFragment());
         content_viewPager.setOffscreenPageLimit(4);//设置至少3个fragment，防止重复创建和销毁，造成内存溢出
         content_viewPager.setAdapter(new ViewPagerFgAdapter(
@@ -65,11 +66,12 @@ public class MainActivity extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.today_github) {
-            String github_trending = "https://github.com/trending";
-//            startActivity(GankWebActivity.newIntent(this, github_trending));
+            String github_trending = "https://github.com/luqinmao/OkRx2MVPDemo";
+            startActivity(WebViewActivity.newIntent(this, github_trending));
             return true;
         } else if (item.getItemId() == R.id.about_me) {
-//            startActivity(new Intent(this, AboutMeActivity.class));
+            String github_trending = "https://github.com/luqinmao";
+            startActivity(WebViewActivity.newIntent(this, github_trending));
             return true;
         } else {
             return super.onOptionsItemSelected(item);

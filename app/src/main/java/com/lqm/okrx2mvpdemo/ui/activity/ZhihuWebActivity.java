@@ -16,7 +16,7 @@ import butterknife.Bind;
 
 /**
  * @user  lqm
- * @desc  知乎详情
+ * @desc  知乎详情页面
  */
 
 public class ZhihuWebActivity extends BaseActivity<IZhihuWebView,ZhihuWebPresenter> implements IZhihuWebView {
