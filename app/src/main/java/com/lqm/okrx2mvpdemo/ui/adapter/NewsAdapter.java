@@ -19,7 +19,7 @@ import java.util.List;
  * desc：新闻适配器
  */
 
-public class NewsAdapter extends BaseQuickAdapter<NewsModel.NewslistBean,BaseViewHolder> {
+public class NewsAdapter extends BaseQuickAdapter<NewsModel.NewslistBean> {
 
     private Context mContext;
 

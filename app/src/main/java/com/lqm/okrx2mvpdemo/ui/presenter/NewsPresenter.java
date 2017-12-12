@@ -51,18 +51,18 @@ public class NewsPresenter extends BasePresenter<NewsView> {
                             mNewsView.getNewsAdapter().addData(newsModel.getNewslist());
                             //显示没有更多数据
                             if (newsModel.getNewslist().size() == 0) {
-                                mNewsView.getNewsAdapter().loadMoreComplete();         //加载完成
+                                mNewsView.getNewsAdapter().loadComplete();         //加载完成
                                 View noDataView = View.inflate(mActivity, R.layout.item_no_data, null);
                                 mNewsView.getNewsAdapter().addFooterView(noDataView);
                             }
                         } else {
-                            mNewsView.getNewsAdapter().loadMoreComplete();         //加载完成
+                            mNewsView.getNewsAdapter().loadComplete();         //加载完成
                         }
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        mNewsView.getNewsAdapter().loadMoreFail();
+                        mNewsView.getNewsAdapter().showLoadMoreFailedView();
                         mNewsView.setDataRefresh(false);
                         Snackbar.make(mNewsView.getRecyclerView(), e.getMessage() + "", Snackbar.LENGTH_SHORT).show();
                     }
@@ -98,24 +98,24 @@ public class NewsPresenter extends BasePresenter<NewsView> {
 
                             //显示没有更多数据
                             if (newsModel.getNewslist().size() == 0) {
-                                mNewsView.getNewsAdapter().loadMoreComplete();         //加载完成
+                                mNewsView.getNewsAdapter().loadComplete();         //加载完成
                                 View noDataView = View.inflate(mActivity, R.layout.item_no_data, null);
                                 mNewsView.getNewsAdapter().addFooterView(noDataView);
                             }
                         } else {
-                            mNewsView.getNewsAdapter().loadMoreComplete();
+                            mNewsView.getNewsAdapter().loadComplete();
                         }
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        mNewsView.getNewsAdapter().loadMoreFail();
+                        mNewsView.getNewsAdapter().showLoadMoreFailedView();
                         Snackbar.make(mNewsView.getRecyclerView(), e.getMessage() + "", Snackbar.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onComplete() {
-                        mNewsView.getNewsAdapter().loadMoreComplete();
+                        mNewsView.getNewsAdapter().loadComplete();
                     }
                 });
     }
