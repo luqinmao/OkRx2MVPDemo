@@ -41,7 +41,7 @@ public class WeiXinPresenter extends BasePresenter<WeiXinView> {
                 .subscribe(new Observer<WeiXinArticleVO>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-//                        mWxView.setDataRefresh(true);
+                        mWxView.setDataRefresh(true);
                     }
 
                     @Override
@@ -61,9 +61,7 @@ public class WeiXinPresenter extends BasePresenter<WeiXinView> {
 
                     @Override
                     public void onError(Throwable e) {
-                        mWxView.getAdapter().showLoadMoreFailedView();
-                        mWxView.setDataRefresh(false);
-                        Snackbar.make(mWxView.getRecyclerView(), e.getMessage() + "", Snackbar.LENGTH_SHORT).show();
+                        showError(e);
                     }
 
                     @Override
@@ -98,7 +96,7 @@ public class WeiXinPresenter extends BasePresenter<WeiXinView> {
     }
 
     private void showError(Throwable e){
-        mWxView.getAdapter().showLoadMoreFailedView();
+        mWxView.setDataRefresh(false);
         Snackbar.make(mWxView.getRecyclerView(), e.getMessage() + "", Snackbar.LENGTH_SHORT).show();
     }
 

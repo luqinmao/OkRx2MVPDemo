@@ -2,8 +2,9 @@ package com.lqm.okrx2mvpdemo.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.webkit.WebView;
 import android.widget.ProgressBar;
 
@@ -28,6 +29,9 @@ public class WebViewActivity extends BaseActivity<CommonWebView,WebViewPresenter
     ProgressBar pb_progress;
     @Bind(R.id.url_web)
     WebView webView;
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
+
 
     private String gank_url;
 
@@ -42,11 +46,14 @@ public class WebViewActivity extends BaseActivity<CommonWebView,WebViewPresenter
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void initView() {
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);//返回箭头
 
         parseIntent();
         mPresenter.setWebView(gank_url);
+
     }
 
     public static Intent newIntent(Context context, String url) {
@@ -87,8 +94,21 @@ public class WebViewActivity extends BaseActivity<CommonWebView,WebViewPresenter
                 return true;
             } else {
                 finish();//退出程序
+                return true;
             }
         }
         return super.onKeyDown(keyCode, event);
     }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // 此时android.R.id.home即为返回箭头
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
+    }
+
 }

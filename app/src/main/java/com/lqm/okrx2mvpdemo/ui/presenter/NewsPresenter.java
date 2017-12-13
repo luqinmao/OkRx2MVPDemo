@@ -42,7 +42,7 @@ public class NewsPresenter extends BasePresenter<NewsView> {
                 .subscribe(new Observer<NewsModel>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-//                        mNewsView.setDataRefresh(true);
+                        mNewsView.setDataRefresh(true);
                     }
 
                     @Override
@@ -62,7 +62,6 @@ public class NewsPresenter extends BasePresenter<NewsView> {
 
                     @Override
                     public void onError(Throwable e) {
-                        mNewsView.getNewsAdapter().showLoadMoreFailedView();
                         mNewsView.setDataRefresh(false);
                         Snackbar.make(mNewsView.getRecyclerView(), e.getMessage() + "", Snackbar.LENGTH_SHORT).show();
                     }

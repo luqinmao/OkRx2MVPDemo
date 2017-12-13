@@ -4,7 +4,6 @@ package com.lqm.okrx2mvpdemo.api;
 import com.lqm.okrx2mvpdemo.helper.JsonConvert;
 import com.lqm.okrx2mvpdemo.model.pojo.News;
 import com.lqm.okrx2mvpdemo.model.pojoVO.NewsTimeLine;
-import com.lqm.okrx2mvpdemo.model.pojo.SplashImage;
 import com.lqm.okrx2mvpdemo.util.RxUtils;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpMethod;
@@ -21,34 +20,27 @@ import io.reactivex.Observable;
 public class ZhihuService {
     public static final String ZHIHU_BASE_URL = "http://news-at.zhihu.com/api/4/";
 
-    private static String getSplashImage = ZHIHU_BASE_URL+"start-image/1080*1920";
-    private static String getLatestNews = ZHIHU_BASE_URL+"news/latest";
-    private static String getBeforetNews = ZHIHU_BASE_URL+"news/before";
-    private static String getDetailNews = ZHIHU_BASE_URL+"news";
+    private static String mLatestNews = ZHIHU_BASE_URL+"news/latest";
+    private static String mBeforetNews = ZHIHU_BASE_URL+"news/before";
+    private static String mDetailNews = ZHIHU_BASE_URL+"news";
 
-
-    public static Observable<SplashImage> getSplashImage(){
-        return RxUtils.request(HttpMethod.GET,getSplashImage,SplashImage.class);
-    }
 
     public static Observable<NewsTimeLine> getLatestNews(){
-        return RxUtils.request(HttpMethod.GET,getLatestNews,NewsTimeLine.class);
+        return RxUtils.request(HttpMethod.GET,mLatestNews,NewsTimeLine.class);
     }
 
     public static Observable<NewsTimeLine> getBeforetNews(String param){
-        String tempUrl  = getBeforetNews+"/"+param;
-        return OkGo.<NewsTimeLine>get(tempUrl)//
-                .converter(new JsonConvert<NewsTimeLine>() {})//
-                .adapt(new ObservableBody<NewsTimeLine>());//
+        String tempUrl  = mBeforetNews+"/"+param;
+        return OkGo.<NewsTimeLine>get(tempUrl)
+                .converter(new JsonConvert<NewsTimeLine>() {})
+                .adapt(new ObservableBody<NewsTimeLine>());
     }
 
     public static Observable<News> getDetailNews(String param) {
-        String tempUrl  = getDetailNews+"/"+param;
-        return OkGo.<News>get(tempUrl)//
-//                .params("id", param)//
-                .converter(new JsonConvert<News>() {})//
-                .adapt(new ObservableBody<News>());//
-
+        String tempUrl  = mDetailNews+"/"+param;
+        return OkGo.<News>get(tempUrl)
+                .converter(new JsonConvert<News>() {})
+                .adapt(new ObservableBody<News>());
     }
 
 }

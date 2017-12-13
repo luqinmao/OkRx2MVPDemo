@@ -40,7 +40,7 @@ public class FunnyPresenter extends BasePresenter<FunnyView> {
                 .subscribe(new Observer<FunnyVO>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-//                        mFunnyView.setDataRefresh(true);
+                        mFunnyView.setDataRefresh(true);
                     }
 
                     @Override
@@ -60,7 +60,6 @@ public class FunnyPresenter extends BasePresenter<FunnyView> {
 
                     @Override
                     public void onError(Throwable e) {
-                        mFunnyView.getAdapter().showLoadMoreFailedView();
                         mFunnyView.setDataRefresh(false);
                         Snackbar.make(mFunnyView.getRecyclerView(), e.getMessage() + "", Snackbar.LENGTH_SHORT).show();
                     }
@@ -97,7 +96,7 @@ public class FunnyPresenter extends BasePresenter<FunnyView> {
     }
 
     private void showError(Throwable e){
-        mFunnyView.getAdapter().showLoadMoreFailedView();
+        mFunnyView.setDataRefresh(false);
         Snackbar.make(mFunnyView.getRecyclerView(), e.getMessage() + "", Snackbar.LENGTH_SHORT).show();
     }
 

@@ -2,6 +2,8 @@ package com.lqm.okrx2mvpdemo.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,7 +20,7 @@ import butterknife.Bind;
  * @desc  知乎详情页面
  */
 
-public class ZhihuWebActivity extends BaseActivity<IZhihuWebView,ZhihuWebPresenter> implements IZhihuWebView {
+public class ZhihuDetailActivity extends BaseActivity<IZhihuWebView,ZhihuWebPresenter> implements IZhihuWebView {
 
     private static final String ID = "id";
 
@@ -32,6 +34,9 @@ public class ZhihuWebActivity extends BaseActivity<IZhihuWebView,ZhihuWebPresent
     TextView tv_img_title;
     @Bind(R.id.tv_img_source)
     TextView tv_img_source;
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
+
 
     @Override
     protected ZhihuWebPresenter createPresenter() {
@@ -40,7 +45,7 @@ public class ZhihuWebActivity extends BaseActivity<IZhihuWebView,ZhihuWebPresent
 
     @Override
     protected int provideContentViewId() {
-        return R.layout.activity_web_view;
+        return R.layout.activity_zhihu_detail;
     }
 
     @Override
@@ -50,6 +55,10 @@ public class ZhihuWebActivity extends BaseActivity<IZhihuWebView,ZhihuWebPresent
 
     @Override
     public void initView() {
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);//返回箭头
+
         mPresenter.getDetailNews(id);
     }
 
@@ -60,8 +69,8 @@ public class ZhihuWebActivity extends BaseActivity<IZhihuWebView,ZhihuWebPresent
     }
 
     public static Intent newIntent(Context context, String id){
-        Intent intent = new Intent(context,ZhihuWebActivity.class);
-        intent.putExtra(ZhihuWebActivity.ID,id);
+        Intent intent = new Intent(context,ZhihuDetailActivity.class);
+        intent.putExtra(ZhihuDetailActivity.ID,id);
         return intent;
     }
 
@@ -83,5 +92,16 @@ public class ZhihuWebActivity extends BaseActivity<IZhihuWebView,ZhihuWebPresent
     @Override
     public TextView getImgSource() {
         return tv_img_source;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // 此时android.R.id.home即为返回箭头
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+            return true;
+        } else {
+            return super.onOptionsItemSelected(item);
+        }
     }
 }

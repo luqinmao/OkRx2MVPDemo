@@ -16,7 +16,7 @@ import com.lqm.okrx2mvpdemo.R;
 import com.lqm.okrx2mvpdemo.model.pojoVO.NewsTimeLine;
 import com.lqm.okrx2mvpdemo.model.pojo.Stories;
 import com.lqm.okrx2mvpdemo.model.pojo.TopStories;
-import com.lqm.okrx2mvpdemo.ui.activity.ZhihuWebActivity;
+import com.lqm.okrx2mvpdemo.ui.activity.ZhihuDetailActivity;
 import com.lqm.okrx2mvpdemo.util.ScreenUtil;
 import com.lqm.okrx2mvpdemo.widget.TopStoriesViewPager;
 
@@ -175,7 +175,7 @@ public class ZhihuListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
         public void bindItem(List<TopStories> topList) {
             vp_top_stories.init(topList,tv_top_title,item -> {
-                context.startActivity(ZhihuWebActivity.newIntent(context,item.getId()));
+                context.startActivity(ZhihuDetailActivity.newIntent(context,item.getId()));
             });
         }
     }
@@ -207,7 +207,7 @@ public class ZhihuListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             List<String> images = stories.getImages();
             Glide.with(context).load(images.get(0)).centerCrop().into(iv_stories_img);
 
-            card_stories.setOnClickListener(v -> context.startActivity(ZhihuWebActivity.newIntent(context,stories.getId())));
+            card_stories.setOnClickListener(v -> context.startActivity(ZhihuDetailActivity.newIntent(context,stories.getId())));
         }
     }
 

@@ -4,6 +4,10 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.cache.CacheEntity;
+import com.lzy.okgo.cache.CacheMode;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -21,11 +25,15 @@ public class App extends Application {
         super.onCreate();
         CONTEXT = this.getApplicationContext();
 
+        OkGo.getInstance()
+            .init(this)
+            .setCacheMode(CacheMode.NO_CACHE)
+            .setCacheTime(CacheEntity.CACHE_NEVER_EXPIRE)
+            .setRetryCount(3);
     }
 
     /**
-     * 完全退出
-     * 一般用于“退出程序”功能
+     * 退出程序
      */
     public static void exit() {
         for (Activity activity : activities) {

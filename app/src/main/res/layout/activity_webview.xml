@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <include layout="@layout/activity_view_toolbar" />
+    <include layout="@layout/activity_view_toolbar"/>
 
     <ProgressBar
         android:id="@+id/pb_progress"

@@ -76,7 +76,6 @@ public class NewsFragment extends BaseFragment<NewsView, NewsPresenter>
 
     @Override
     public void onRefresh() {
-        setDataRefresh(true);
         mPresenter.refreshData();
     }
 

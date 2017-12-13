@@ -3,6 +3,7 @@ package com.lqm.okrx2mvpdemo.ui.activity;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -27,6 +28,9 @@ public class MainActivity extends BaseActivity {
     TabLayout tabLayout;
     @Bind(R.id.content_viewPager)
     ViewPager content_viewPager;
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
+
 
     private List<BaseFragment> fragmentList;
 
@@ -43,7 +47,19 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        initToolbar();
+
         initTabView();
+    }
+
+    private void initToolbar() {
+        setSupportActionBar(toolbar);
+//        if (canBack()) {
+//            ActionBar actionBar = getSupportActionBar();
+//            if (actionBar != null)
+//                actionBar.setDisplayHomeAsUpEnabled(true);//设置ActionBar一个返回箭头，主界面没有，次级界面有
+//        }
     }
 
     //初始化Tab滑动
@@ -58,6 +74,7 @@ public class MainActivity extends BaseActivity {
                 getSupportFragmentManager(), fragmentList, "main_view_pager"));//给ViewPager设置适配器
         tabLayout.setupWithViewPager(content_viewPager);//将TabLayout和ViewPager关联起来
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -79,5 +96,5 @@ public class MainActivity extends BaseActivity {
             return super.onOptionsItemSelected(item);
         }
     }
-}
 
+}

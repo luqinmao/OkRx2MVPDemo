@@ -73,7 +73,6 @@ public class WeiXinFragment extends BaseFragment<WeiXinView, WeiXinPresenter>
 
     @Override
     public void onRefresh() {
-        setDataRefresh(true);
         mPresenter.getRefreshData();
     }
 

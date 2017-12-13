@@ -3,6 +3,7 @@ package com.lqm.okrx2mvpdemo.api;
 import com.lqm.okrx2mvpdemo.helper.JsonConvert;
 import com.lqm.okrx2mvpdemo.model.pojoVO.NewsModel;
 import com.lzy.okgo.OkGo;
+import com.lzy.okgo.cache.CacheMode;
 import com.lzy.okrx2.adapter.ObservableBody;
 
 import io.reactivex.Observable;
@@ -22,6 +23,7 @@ public class NewsService {
                 .params("key","d54d8c95b85b8c4fe651976a731538e0")
                 .params("page",page)
                 .params("num",num)
+                .cacheMode(CacheMode.FIRST_CACHE_THEN_REQUEST)
                 .converter(new JsonConvert<NewsModel>() {})
                 .adapt(new ObservableBody<NewsModel>());
     }

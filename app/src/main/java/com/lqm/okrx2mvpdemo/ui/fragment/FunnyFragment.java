@@ -73,7 +73,6 @@ public class FunnyFragment extends BaseFragment<FunnyView,FunnyPresenter>
 
         @Override
         public void onRefresh() {
-            setDataRefresh(true);
             mPresenter.getRefreshData();
         }
 
