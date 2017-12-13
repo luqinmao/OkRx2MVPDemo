@@ -1,7 +1,7 @@
 package com.lqm.okrx2mvpdemo.ui.fragment;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
+import android.graphics.Color;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -17,11 +17,14 @@ import butterknife.Bind;
  * @user  lqm
  * @desc  知乎
  */
-public class ZhihuFragment extends BaseFragment<IZhihuFgView,ZhihuFgPresenter> implements IZhihuFgView {
+public class ZhihuFragment extends BaseFragment<IZhihuFgView,ZhihuFgPresenter>
+        implements IZhihuFgView ,SwipeRefreshLayout.OnRefreshListener{
 
     private LinearLayoutManager mLayoutManager;
     @Bind(R.id.content_list)
     RecyclerView content_list;
+    @Bind(R.id.swipe_refresh)
+    SwipeRefreshLayout swipeRefresh;
 
     @Override
     protected ZhihuFgPresenter createPresenter() {
@@ -29,34 +32,19 @@ public class ZhihuFragment extends BaseFragment<IZhihuFgView,ZhihuFgPresenter> i
     }
 
     @Override
-    protected int createViewLayoutId() {
+    protected int provideContentViewId() {
         return R.layout.frag_zhihu;
     }
 
     @Override
-    protected void initView(View rootView) {
+    public void initView(View rootView) {
         mLayoutManager = new LinearLayoutManager(getContext());
         content_list.setLayoutManager(mLayoutManager);
-    }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        setDataRefresh(true);
-        mPresenter.getLatestNews();
-        mPresenter.scrollRecycleView();
-    }
+        swipeRefresh.setColorSchemeColors(Color.RED, Color.BLUE, Color.GREEN);
+        swipeRefresh.setOnRefreshListener(this);
 
-    @Override
-    public void requestDataRefresh() {
-        super.requestDataRefresh();
-        setDataRefresh(true);
-        mPresenter.getLatestNews();
-    }
-
-    @Override
-    public void setDataRefresh(Boolean refresh) {
-        setRefresh(refresh);
+        onRefresh();
     }
 
     @Override
@@ -67,5 +55,23 @@ public class ZhihuFragment extends BaseFragment<IZhihuFgView,ZhihuFgPresenter> i
     @Override
     public LinearLayoutManager getLayoutManager() {
         return mLayoutManager;
+    }
+
+    @Override
+    public void onRefresh() {
+        setDataRefresh(true);
+        mPresenter.getLatestNews();
+        mPresenter.scrollRecycleView();
+
+    }
+
+    @Override
+    public void setDataRefresh(Boolean refresh) {
+        swipeRefresh.post(new Runnable() {
+            @Override
+            public void run() {
+                swipeRefresh.setRefreshing(refresh);
+            }
+        });
     }
 }

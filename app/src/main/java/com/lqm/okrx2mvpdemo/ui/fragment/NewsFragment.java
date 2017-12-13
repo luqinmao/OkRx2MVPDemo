@@ -23,7 +23,7 @@ import butterknife.Bind;
 
 public class NewsFragment extends BaseFragment<NewsView, NewsPresenter>
                     implements NewsView,SwipeRefreshLayout.OnRefreshListener,
-                                 BaseQuickAdapter.RequestLoadMoreListener{
+                                BaseQuickAdapter.RequestLoadMoreListener{
     @Bind(R.id.rv_content)
     RecyclerView rvContent;
     @Bind(R.id.swipe_refresh)
@@ -37,7 +37,7 @@ public class NewsFragment extends BaseFragment<NewsView, NewsPresenter>
     }
 
     @Override
-    protected int createViewLayoutId() {
+    protected int provideContentViewId() {
         return R.layout.frag_news;
     }
 
@@ -52,17 +52,7 @@ public class NewsFragment extends BaseFragment<NewsView, NewsPresenter>
     }
 
     @Override
-    public void setDataRefresh(Boolean refresh) {
-        swipeRefresh.post(new Runnable() {
-            @Override
-            public void run() {
-                swipeRefresh.setRefreshing(refresh);
-            }
-        });
-    }
-
-    @Override
-    protected void initView(View rootView) {
+    public void initView(View rootView) {
 
         rvContent.setItemAnimator(new DefaultItemAnimator());
         rvContent.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -74,19 +64,33 @@ public class NewsFragment extends BaseFragment<NewsView, NewsPresenter>
 
         swipeRefresh.setColorSchemeColors(Color.RED, Color.BLUE, Color.GREEN);
         swipeRefresh.setOnRefreshListener(this);
+
         mNewsAdapter.setOnLoadMoreListener(this);
 
         onRefresh();
-
-    }
-
-    @Override
-    public void onRefresh() {
-        mPresenter.refreshData();
     }
 
     @Override
     public void onLoadMoreRequested() {
         mPresenter.loadMoreData();
     }
+
+
+    @Override
+    public void onRefresh() {
+        setDataRefresh(true);
+        mPresenter.refreshData();
+
+    }
+
+    @Override
+    public void setDataRefresh(Boolean refresh) {
+        swipeRefresh.post(new Runnable() {
+            @Override
+            public void run() {
+                swipeRefresh.setRefreshing(refresh);
+            }
+        });
+    }
+
 }

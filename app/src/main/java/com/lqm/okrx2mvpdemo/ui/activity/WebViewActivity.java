@@ -62,11 +62,6 @@ public class WebViewActivity extends BaseActivity<CommonWebView,WebViewPresenter
     }
 
     @Override
-    public boolean canBack() {
-        return true;
-    }
-
-    @Override
     public ProgressBar getProgressBar() {
         return pb_progress;
     }

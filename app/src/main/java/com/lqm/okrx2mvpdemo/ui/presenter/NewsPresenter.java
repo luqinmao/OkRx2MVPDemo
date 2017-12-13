@@ -42,7 +42,7 @@ public class NewsPresenter extends BasePresenter<NewsView> {
                 .subscribe(new Observer<NewsModel>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-                        mNewsView.setDataRefresh(true);
+//                        mNewsView.setDataRefresh(true);
                     }
 
                     @Override

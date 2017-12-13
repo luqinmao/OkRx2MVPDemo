@@ -2,92 +2,78 @@ package com.lqm.okrx2mvpdemo.ui.base;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.lqm.okrx2mvpdemo.R;
-
 import butterknife.ButterKnife;
+import io.reactivex.annotations.Nullable;
+
 /**
- * @user  lqm
- * @desc  BaseFragment
+ * user：lqm
+ * desc：BaseFragment
  */
 
 public abstract class BaseFragment<V, T extends BasePresenter<V>> extends Fragment {
 
     protected T mPresenter;
 
-    private boolean mIsRequestDataRefresh = false;
-    private SwipeRefreshLayout mRefreshLayout;
-
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        init();
+
+        //判断是否使用MVP模式
         mPresenter = createPresenter();
-        mPresenter.attachView((V) this);
+        if (mPresenter != null) {
+            mPresenter.attachView((V) this);//因为之后所有的子类都要实现对应的View接口
+        }
+    }
+
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        //子类不再需要设置布局ID，也不再需要使用ButterKnife.bind()
+        View rootView = inflater.inflate(provideContentViewId(), container, false);
+        ButterKnife.bind(this, rootView);
+        initView(rootView);
+        return rootView;
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(createViewLayoutId(),container,false);
-        ButterKnife.bind(this,rootView);
-        initView(rootView);
-        if(isSetRefresh()) {
-            setupSwipeRefresh(rootView);
-        }
-        return rootView;
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        initData();
+        initListener();
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mPresenter.detachView();
-    }
-
-    private void setupSwipeRefresh(View view){
-        mRefreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.swipe_refresh);
-        if(mRefreshLayout != null){
-            mRefreshLayout.setColorSchemeResources(R.color.refresh_progress_1,
-                    R.color.refresh_progress_2,R.color.refresh_progress_3);
-            mRefreshLayout.setProgressViewOffset(true, 0, (int) TypedValue
-                    .applyDimension(TypedValue.COMPLEX_UNIT_DIP, 24,getResources().getDisplayMetrics()));
-            mRefreshLayout.setOnRefreshListener(this::requestDataRefresh);
+        if (mPresenter != null) {
+            mPresenter.detachView();
         }
     }
 
-    public void requestDataRefresh() {
-        mIsRequestDataRefresh = true;
+    public void init() {
+
     }
 
-
-    public void setRefresh(boolean requestDataRefresh) {
-        if (mRefreshLayout == null) {
-            return;
-        }
-        if (!requestDataRefresh) {
-            mIsRequestDataRefresh = false;
-            mRefreshLayout.postDelayed(() -> {
-                if (mRefreshLayout != null) {
-                    mRefreshLayout.setRefreshing(false);
-                }
-            }, 1000);
-        } else {
-            mRefreshLayout.setRefreshing(true);
-        }
+    public void initView(View rootView) {
     }
 
+    public void initData() {
+
+    }
+
+    public void initListener() {
+
+    }
+
+    //用于创建Presenter和判断是否使用MVP模式(由子类实现)
     protected abstract T createPresenter();
 
-    protected abstract int createViewLayoutId();
-
-    protected  void initView(View rootView){}
-
-    public Boolean isSetRefresh(){
-        return true;
-    }
-
+    //得到当前界面的布局文件id(由子类实现)
+    protected abstract int provideContentViewId();
 }
-
