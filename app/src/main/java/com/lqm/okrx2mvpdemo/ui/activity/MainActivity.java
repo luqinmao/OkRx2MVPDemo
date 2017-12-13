@@ -11,7 +11,9 @@ import com.lqm.okrx2mvpdemo.ui.adapter.ViewPagerFgAdapter;
 import com.lqm.okrx2mvpdemo.ui.base.BaseActivity;
 import com.lqm.okrx2mvpdemo.ui.base.BaseFragment;
 import com.lqm.okrx2mvpdemo.ui.base.BasePresenter;
+import com.lqm.okrx2mvpdemo.ui.fragment.FunnyFragment;
 import com.lqm.okrx2mvpdemo.ui.fragment.NewsFragment;
+import com.lqm.okrx2mvpdemo.ui.fragment.WeiXinFragment;
 import com.lqm.okrx2mvpdemo.ui.fragment.ZhihuFragment;
 
 import java.util.ArrayList;
@@ -47,10 +49,10 @@ public class MainActivity extends BaseActivity {
     //初始化Tab滑动
     public void initTabView() {
         fragmentList = new ArrayList<>();
-        fragmentList.add(new ZhihuFragment());
+        fragmentList.add(new WeiXinFragment());
         fragmentList.add(new ZhihuFragment());
         fragmentList.add(new NewsFragment());
-        fragmentList.add(new ZhihuFragment());
+        fragmentList.add(new FunnyFragment());
         content_viewPager.setOffscreenPageLimit(4);//设置至少3个fragment，防止重复创建和销毁，造成内存溢出
         content_viewPager.setAdapter(new ViewPagerFgAdapter(
                 getSupportFragmentManager(), fragmentList, "main_view_pager"));//给ViewPager设置适配器

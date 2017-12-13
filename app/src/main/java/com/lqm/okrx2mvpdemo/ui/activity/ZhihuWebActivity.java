@@ -2,7 +2,6 @@ package com.lqm.okrx2mvpdemo.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.webkit.WebView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -45,9 +44,12 @@ public class ZhihuWebActivity extends BaseActivity<IZhihuWebView,ZhihuWebPresent
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        parseIntent();
+    public void init() {
+        id = getIntent().getStringExtra(ID);
+    }
+
+    @Override
+    public void initView() {
         mPresenter.getDetailNews(id);
     }
 
@@ -61,10 +63,6 @@ public class ZhihuWebActivity extends BaseActivity<IZhihuWebView,ZhihuWebPresent
         Intent intent = new Intent(context,ZhihuWebActivity.class);
         intent.putExtra(ZhihuWebActivity.ID,id);
         return intent;
-    }
-
-    private void parseIntent(){
-        id = getIntent().getStringExtra(ID);
     }
 
     @Override

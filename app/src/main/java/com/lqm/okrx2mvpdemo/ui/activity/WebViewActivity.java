@@ -3,6 +3,7 @@ package com.lqm.okrx2mvpdemo.ui.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.webkit.WebView;
 import android.widget.ProgressBar;
 
@@ -26,7 +27,7 @@ public class WebViewActivity extends BaseActivity<CommonWebView,WebViewPresenter
     @Bind(R.id.pb_progress)
     ProgressBar pb_progress;
     @Bind(R.id.url_web)
-    WebView url_web;
+    WebView webView;
 
     private String gank_url;
 
@@ -68,12 +69,26 @@ public class WebViewActivity extends BaseActivity<CommonWebView,WebViewPresenter
 
     @Override
     public WebView getWebView() {
-        return url_web;
+        return webView;
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        url_web.destroy();
+        webView.destroy();
+    }
+
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && webView.canGoBack()) {
+            if (webView.canGoBack()) {
+                webView.goBack();
+                return true;
+            } else {
+                finish();//退出程序
+            }
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

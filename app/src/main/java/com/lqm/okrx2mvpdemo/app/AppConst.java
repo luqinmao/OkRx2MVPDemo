@@ -6,4 +6,8 @@ package com.lqm.okrx2mvpdemo.app;
  */
 
 public class AppConst {
+
+
+
+
 }
