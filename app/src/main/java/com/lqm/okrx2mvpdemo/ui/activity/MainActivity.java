@@ -6,6 +6,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.lqm.okrx2mvpdemo.R;
 import com.lqm.okrx2mvpdemo.ui.adapter.ViewPagerFgAdapter;
@@ -48,19 +49,11 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        initToolbar();
+        setSupportActionBar(toolbar);
 
         initTabView();
     }
 
-    private void initToolbar() {
-        setSupportActionBar(toolbar);
-//        if (canBack()) {
-//            ActionBar actionBar = getSupportActionBar();
-//            if (actionBar != null)
-//                actionBar.setDisplayHomeAsUpEnabled(true);//设置ActionBar一个返回箭头，主界面没有，次级界面有
-//        }
-    }
 
     //初始化Tab滑动
     public void initTabView() {
@@ -85,12 +78,11 @@ public class MainActivity extends BaseActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.today_github) {
-            String github_trending = "https://github.com/luqinmao/OkRx2MVPDemo";
+            String github_trending = "https://github.com/luqinmao";
             startActivity(WebViewActivity.newIntent(this, github_trending));
             return true;
         } else if (item.getItemId() == R.id.about_me) {
-            String github_trending = "https://github.com/luqinmao";
-            startActivity(WebViewActivity.newIntent(this, github_trending));
+            Toast.makeText(MainActivity.this,"小菜鸡呱呱叫!",Toast.LENGTH_SHORT).show();
             return true;
         } else {
             return super.onOptionsItemSelected(item);
