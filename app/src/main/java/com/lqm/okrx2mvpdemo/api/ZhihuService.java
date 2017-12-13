@@ -2,9 +2,9 @@ package com.lqm.okrx2mvpdemo.api;
 
 
 import com.lqm.okrx2mvpdemo.helper.JsonConvert;
-import com.lqm.okrx2mvpdemo.model.News;
-import com.lqm.okrx2mvpdemo.model.NewsTimeLine;
-import com.lqm.okrx2mvpdemo.model.SplashImage;
+import com.lqm.okrx2mvpdemo.model.pojo.News;
+import com.lqm.okrx2mvpdemo.model.pojoVO.NewsTimeLine;
+import com.lqm.okrx2mvpdemo.model.pojo.SplashImage;
 import com.lqm.okrx2mvpdemo.util.RxUtils;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.model.HttpMethod;

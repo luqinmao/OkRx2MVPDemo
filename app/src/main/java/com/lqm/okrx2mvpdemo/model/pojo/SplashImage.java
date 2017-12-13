@@ -1,12 +1,10 @@
-package com.lqm.okrx2mvpdemo.model;
+package com.lqm.okrx2mvpdemo.model.pojo;
 
 import java.io.Serializable;
 
 /**
- * Created by Werb on 2016/8/18.
- * Werb is Wanbo.
- * Contact Me : werbhelius@gmail.com
- * Zhihu start-image
+ * autour: lqm
+ * desc: SplashImage
  */
 public class SplashImage implements Serializable {
 

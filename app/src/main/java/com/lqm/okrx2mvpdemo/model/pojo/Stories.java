@@ -1,4 +1,4 @@
-package com.lqm.okrx2mvpdemo.model;
+package com.lqm.okrx2mvpdemo.model.pojo;
 
 import java.io.Serializable;
 import java.util.List;

@@ -6,7 +6,7 @@ import android.view.View;
 
 import com.lqm.okrx2mvpdemo.R;
 import com.lqm.okrx2mvpdemo.api.WeiXinService;
-import com.lqm.okrx2mvpdemo.model.WeiXinArticle;
+import com.lqm.okrx2mvpdemo.model.pojoVO.WeiXinArticleVO;
 import com.lqm.okrx2mvpdemo.ui.base.BasePresenter;
 import com.lqm.okrx2mvpdemo.ui.view.WeiXinView;
 
@@ -38,14 +38,14 @@ public class WeiXinPresenter extends BasePresenter<WeiXinView> {
         WeiXinService.getArticleData(mCurrentPage, PAGENUM)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<WeiXinArticle>() {
+                .subscribe(new Observer<WeiXinArticleVO>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 //                        mWxView.setDataRefresh(true);
                     }
 
                     @Override
-                    public void onNext(WeiXinArticle newsModel) {
+                    public void onNext(WeiXinArticleVO newsModel) {
                         if (newsModel.getNewslist().size() != 0) {   //防止崩溃
                             mWxView.getAdapter().addData(newsModel.getNewslist());
                             //显示没有更多数据
@@ -87,7 +87,7 @@ public class WeiXinPresenter extends BasePresenter<WeiXinView> {
                 .subscribe(articleData -> setMoreDataView(articleData),this::showError);
     }
 
-    private void setMoreDataView(WeiXinArticle articleData){
+    private void setMoreDataView(WeiXinArticleVO articleData){
         if (articleData.getNewslist().size() != 0) {
             mWxView.getAdapter().addData(articleData.getNewslist());
         } else {

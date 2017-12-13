@@ -13,9 +13,9 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.lqm.okrx2mvpdemo.R;
-import com.lqm.okrx2mvpdemo.model.NewsTimeLine;
-import com.lqm.okrx2mvpdemo.model.Stories;
-import com.lqm.okrx2mvpdemo.model.TopStories;
+import com.lqm.okrx2mvpdemo.model.pojoVO.NewsTimeLine;
+import com.lqm.okrx2mvpdemo.model.pojo.Stories;
+import com.lqm.okrx2mvpdemo.model.pojo.TopStories;
 import com.lqm.okrx2mvpdemo.ui.activity.ZhihuWebActivity;
 import com.lqm.okrx2mvpdemo.util.ScreenUtil;
 import com.lqm.okrx2mvpdemo.widget.TopStoriesViewPager;

@@ -1,7 +1,6 @@
 package com.lqm.okrx2mvpdemo.ui.base;
 
 import android.app.Dialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -11,18 +10,15 @@ import android.widget.TextView;
 
 import com.lqm.okrx2mvpdemo.R;
 import com.lqm.okrx2mvpdemo.app.App;
-import com.lqm.okrx2mvpdemo.ui.activity.WebViewActivity;
 import com.lqm.okrx2mvpdemo.widget.CustomDialog;
 
 import butterknife.ButterKnife;
-import me.drakeet.materialdialog.MaterialDialog;
 
 public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCompatActivity {
 
 
     protected T mPresenter;
     private CustomDialog mDialogWaiting;
-    private MaterialDialog mMaterialDialog;
 
 
     @Override
@@ -99,67 +95,6 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
             mDialogWaiting.dismiss();
             mDialogWaiting = null;
         }
-    }
-
-    /**
-     * 显示MaterialDialog
-     */
-    public MaterialDialog showMaterialDialog(String title, String message, String positiveText, String negativeText, View.OnClickListener positiveButtonClickListener, View.OnClickListener negativeButtonClickListener) {
-        hideMaterialDialog();
-        mMaterialDialog = new MaterialDialog(this);
-        if (!TextUtils.isEmpty(title)) {
-            mMaterialDialog.setTitle(title);
-        }
-        if (!TextUtils.isEmpty(message)) {
-            mMaterialDialog.setMessage(message);
-        }
-        if (!TextUtils.isEmpty(positiveText)) {
-            mMaterialDialog.setPositiveButton(positiveText, positiveButtonClickListener);
-        }
-        if (!TextUtils.isEmpty(negativeText)) {
-            mMaterialDialog.setNegativeButton(negativeText, negativeButtonClickListener);
-        }
-        mMaterialDialog.show();
-        return mMaterialDialog;
-    }
-
-    /**
-     * 隐藏MaterialDialog
-     */
-    public void hideMaterialDialog() {
-        if (mMaterialDialog != null) {
-            mMaterialDialog.dismiss();
-            mMaterialDialog = null;
-        }
-    }
-
-    public void jumpToActivity(Intent intent) {
-        startActivity(intent);
-    }
-
-    public void jumpToActivity(Class activity) {
-        Intent intent = new Intent(this, activity);
-        startActivity(intent);
-    }
-
-    public void jumpToWebViewActivity(String url) {
-        Intent intent = new Intent(this, WebViewActivity.class);
-        intent.putExtra("url", url);
-        jumpToActivity(intent);
-    }
-
-
-    public void jumpToActivityAndClearTask(Class activity) {
-        Intent intent = new Intent(this, activity);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(intent);
-        finish();
-    }
-
-    public void jumpToActivityAndClearTop(Class activity) {
-        Intent intent = new Intent(this, activity);
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
     }
 
 }

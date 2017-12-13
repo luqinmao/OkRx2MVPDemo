@@ -1,7 +1,7 @@
 package com.lqm.okrx2mvpdemo.api;
 
 import com.lqm.okrx2mvpdemo.helper.JsonConvert;
-import com.lqm.okrx2mvpdemo.model.NewsModel;
+import com.lqm.okrx2mvpdemo.model.pojoVO.NewsModel;
 import com.lzy.okgo.OkGo;
 import com.lzy.okrx2.adapter.ObservableBody;
 

@@ -6,7 +6,7 @@ import android.view.View;
 
 import com.lqm.okrx2mvpdemo.R;
 import com.lqm.okrx2mvpdemo.api.NewsService;
-import com.lqm.okrx2mvpdemo.model.NewsModel;
+import com.lqm.okrx2mvpdemo.model.pojoVO.NewsModel;
 import com.lqm.okrx2mvpdemo.ui.base.BasePresenter;
 import com.lqm.okrx2mvpdemo.ui.view.NewsView;
 

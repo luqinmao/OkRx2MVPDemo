@@ -9,7 +9,7 @@ import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.lqm.okrx2mvpdemo.R;
-import com.lqm.okrx2mvpdemo.model.WeiXinArticle;
+import com.lqm.okrx2mvpdemo.model.pojo.NewslistBean;
 import com.lqm.okrx2mvpdemo.ui.activity.WebViewActivity;
 
 import java.util.List;
@@ -19,17 +19,17 @@ import java.util.List;
  * desc：新闻适配器
  */
 
-public class WeiXinAdapter extends BaseQuickAdapter<WeiXinArticle.NewslistBean> {
+public class WeiXinAdapter extends BaseQuickAdapter<NewslistBean> {
 
     private Context mContext;
 
-    public WeiXinAdapter(Context context, @Nullable List<WeiXinArticle.NewslistBean> data) {
+    public WeiXinAdapter(Context context, @Nullable List<NewslistBean> data) {
         super(R.layout.item_weixin_article, data);
         mContext = context;
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, WeiXinArticle.NewslistBean bean) {
+    protected void convert(BaseViewHolder helper, NewslistBean bean) {
 
         helper.setText(R.id.tv_article_title,bean.getTitle())
                 .setText(R.id.tv_article_time,bean.getCtime())

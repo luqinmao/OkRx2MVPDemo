@@ -1,12 +1,14 @@
-package com.lqm.okrx2mvpdemo.model;
+package com.lqm.okrx2mvpdemo.model.pojoVO;
+
+import com.lqm.okrx2mvpdemo.model.pojo.Stories;
+import com.lqm.okrx2mvpdemo.model.pojo.TopStories;
 
 import java.io.Serializable;
 import java.util.List;
 
 /**
- * Created by Werb on 2016/8/18.
- * Werb is Wanbo.
- * Contact Me : werbhelius@gmail.com
+ * autour: lqm
+ * desc: 知乎
  */
 public class NewsTimeLine implements Serializable {
 

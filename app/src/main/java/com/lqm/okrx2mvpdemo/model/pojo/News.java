@@ -1,14 +1,14 @@
-package com.lqm.okrx2mvpdemo.model;
+package com.lqm.okrx2mvpdemo.model.pojo;
 
 import java.io.Serializable;
 import java.util.List;
 
 /**
- * Created by luqinmao on 2017/12/11.
+ * autour: lqm
+ * desc: 新闻
  */
 
 public class News implements Serializable{
-
 
     private String body;
     private String image_source;

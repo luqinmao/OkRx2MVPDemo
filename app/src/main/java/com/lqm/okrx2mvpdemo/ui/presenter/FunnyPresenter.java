@@ -6,7 +6,7 @@ import android.view.View;
 
 import com.lqm.okrx2mvpdemo.R;
 import com.lqm.okrx2mvpdemo.api.FunnyService;
-import com.lqm.okrx2mvpdemo.model.Funny;
+import com.lqm.okrx2mvpdemo.model.pojoVO.FunnyVO;
 import com.lqm.okrx2mvpdemo.ui.base.BasePresenter;
 import com.lqm.okrx2mvpdemo.ui.view.FunnyView;
 
@@ -37,14 +37,14 @@ public class FunnyPresenter extends BasePresenter<FunnyView> {
         FunnyService.getFunnyData(mCurrentPage, PAGENUM)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<Funny>() {
+                .subscribe(new Observer<FunnyVO>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 //                        mFunnyView.setDataRefresh(true);
                     }
 
                     @Override
-                    public void onNext(Funny newsModel) {
+                    public void onNext(FunnyVO newsModel) {
                         if (newsModel.getNewslist().size() != 0) {   //防止崩溃
                             mFunnyView.getAdapter().addData(newsModel.getNewslist());
                             //显示没有更多数据
@@ -86,7 +86,7 @@ public class FunnyPresenter extends BasePresenter<FunnyView> {
                 .subscribe(articleData -> setMoreDataView(articleData),this::showError);
     }
 
-    private void setMoreDataView(Funny articleData){
+    private void setMoreDataView(FunnyVO articleData){
         if (articleData.getNewslist().size() != 0) {
             mFunnyView.getAdapter().addData(articleData.getNewslist());
         } else {

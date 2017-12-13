@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.lqm.okrx2mvpdemo.app.App;
-import com.lqm.okrx2mvpdemo.model.TopStories;
+import com.lqm.okrx2mvpdemo.model.pojo.TopStories;
 import com.lqm.okrx2mvpdemo.util.ScreenUtil;
 
 import java.util.ArrayList;

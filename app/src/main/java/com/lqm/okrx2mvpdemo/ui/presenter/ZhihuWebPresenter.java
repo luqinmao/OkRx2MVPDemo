@@ -10,7 +10,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.lqm.okrx2mvpdemo.R;
 import com.lqm.okrx2mvpdemo.api.ZhihuService;
-import com.lqm.okrx2mvpdemo.model.News;
+import com.lqm.okrx2mvpdemo.model.pojo.News;
 import com.lqm.okrx2mvpdemo.ui.base.BasePresenter;
 import com.lqm.okrx2mvpdemo.ui.view.IZhihuWebView;
 

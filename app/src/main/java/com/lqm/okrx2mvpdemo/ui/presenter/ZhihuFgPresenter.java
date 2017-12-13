@@ -8,7 +8,7 @@ import android.widget.Toast;
 
 import com.lqm.okrx2mvpdemo.R;
 import com.lqm.okrx2mvpdemo.api.ZhihuService;
-import com.lqm.okrx2mvpdemo.model.NewsTimeLine;
+import com.lqm.okrx2mvpdemo.model.pojoVO.NewsTimeLine;
 import com.lqm.okrx2mvpdemo.ui.adapter.ZhihuListAdapter;
 import com.lqm.okrx2mvpdemo.ui.base.BasePresenter;
 import com.lqm.okrx2mvpdemo.ui.view.IZhihuFgView;
