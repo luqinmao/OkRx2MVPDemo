@@ -85,39 +85,22 @@ public class NewsPresenter extends BasePresenter<NewsView> {
         NewsService.getNewsData(mCurrentPage, PAGENUM)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<NewsModel>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
+                .subscribe(newsModel -> setMoreDataView(newsModel),this::showError);
+    }
 
-                    }
+    private void setMoreDataView(NewsModel newsModel){
+        if (newsModel.getNewslist().size() != 0) {
+                mNewsView.getNewsAdapter().addData(newsModel.getNewslist());
+        } else {
+            mNewsView.getNewsAdapter().loadComplete();
+            View noDataView = View.inflate(mActivity, R.layout.item_no_data, null);
+            mNewsView.getNewsAdapter().addFooterView(noDataView);
+        }
+    }
 
-                    @Override
-                    public void onNext(NewsModel newsModel) {
-                        if (newsModel.getNewslist().size() != 0) {   //防止崩溃
-                            mNewsView.getNewsAdapter().addData(newsModel.getNewslist());
-
-                            //显示没有更多数据
-                            if (newsModel.getNewslist().size() == 0) {
-                                mNewsView.getNewsAdapter().loadComplete();         //加载完成
-                                View noDataView = View.inflate(mActivity, R.layout.item_no_data, null);
-                                mNewsView.getNewsAdapter().addFooterView(noDataView);
-                            }
-                        } else {
-                            mNewsView.getNewsAdapter().loadComplete();
-                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        mNewsView.getNewsAdapter().showLoadMoreFailedView();
-                        Snackbar.make(mNewsView.getRecyclerView(), e.getMessage() + "", Snackbar.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        mNewsView.getNewsAdapter().loadComplete();
-                    }
-                });
+    private void showError(Throwable e){
+        mNewsView.getNewsAdapter().showLoadMoreFailedView();
+        Snackbar.make(mNewsView.getRecyclerView(), e.getMessage() + "", Snackbar.LENGTH_SHORT).show();
     }
 
 }

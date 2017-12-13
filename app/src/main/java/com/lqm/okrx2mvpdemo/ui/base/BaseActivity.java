@@ -6,11 +6,11 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
 import com.lqm.okrx2mvpdemo.R;
+import com.lqm.okrx2mvpdemo.app.App;
 import com.lqm.okrx2mvpdemo.ui.activity.WebViewActivity;
 import com.lqm.okrx2mvpdemo.widget.CustomDialog;
 
@@ -24,28 +24,12 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
     private CustomDialog mDialogWaiting;
     private MaterialDialog mMaterialDialog;
 
-    //以下是所有Activity中可能会出现的控件
-//    @Bind(R.id.appBar)
-//    protected AppBarLayout mAppBar;
-//    //    @Bind(R.id.toolbar)
-//    //    protected Toolbar mToolbar;
-//    @Bind(R.id.flToolbar)
-//    public FrameLayout mToolbar;
-//    @Bind(R.id.ivToolbarNavigation)
-//    public ImageView mToolbarNavigation;
-//    @Bind(R.id.vToolbarDivision)
-//    public View mToolbarDivision;
-//    @Bind(R.id.llToolbarTitle)
-//    public AutoLinearLayout mLlToolbarTitle;
-//    @Bind(R.id.tvToolbarTitle)
-//    public TextView mToolbarTitle;
-//    @Bind(R.id.tvToolbarSubTitle)
-//    public TextView mToolbarSubTitle;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        MyApp.activities.add(this);
+        App.activities.add(this);
+
         init();
 
         //判断是否使用MVP模式
@@ -58,51 +42,12 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
         setContentView(provideContentViewId());
         ButterKnife.bind(this);
 
-//        setupAppBarAndToolbar();
-
         //沉浸式状态栏
 //        StatusBarUtil.setColor(this, UIUtils.getColor(R.color.colorPrimaryDark), 10);
 
         initView();
         initData();
         initListener();
-    }
-
-    /**
-     * 设置AppBar和Toolbar
-     */
-//    private void setupAppBarAndToolbar() {
-//        //如果该应用运行在android 5.0以上设备，设置标题栏的z轴高度
-//        if (mAppBar != null && Build.VERSION.SDK_INT > 21) {
-//            mAppBar.setElevation(10.6f);
-//        }
-//
-//        //如果界面中有使用toolbar，则使用toolbar替代actionbar
-//        //默认不是使用NoActionBar主题，所以如果需要使用Toolbar，需要自定义NoActionBar主题后，在AndroidManifest.xml中对指定Activity设置theme
-////        if (mToolbar != null) {
-////            setSupportActionBar(mToolbar);
-////            if (isToolbarCanBack()) {
-////                ActionBar actionBar = getSupportActionBar();
-////                if (actionBar != null) {
-////                    actionBar.setDisplayHomeAsUpEnabled(true);
-////                }
-////            }
-////        }
-//
-//        mToolbarNavigation.setVisibility(isToolbarCanBack() ? View.VISIBLE : View.GONE);
-//        mToolbarDivision.setVisibility(isToolbarCanBack() ? View.VISIBLE : View.GONE);
-//        mToolbarNavigation.setOnClickListener(v -> onBackPressed());
-//        mLlToolbarTitle.setPadding(isToolbarCanBack() ? 0 : 40, 0, 0, 0);
-//    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                finish();
-                break;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -131,13 +76,6 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
 
     //得到当前界面的布局文件id(由子类实现)
     protected abstract int provideContentViewId();
-
-    /**
-     * 是否让Toolbar有返回按钮(默认可以，一般一个应用中除了主界面，其他界面都是可以有返回按钮的)
-     */
-    protected boolean isToolbarCanBack() {
-        return true;
-    }
 
     /**
      * 显示等待提示框
@@ -223,15 +161,5 @@ public abstract class BaseActivity<V, T extends BasePresenter<V>> extends AppCom
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
-
-    /*------------------ toolbar的一些视图操作 ------------------*/
-//    public void setToolbarTitle(String title) {
-//        mToolbarTitle.setText(title);
-//    }
-//
-//    public void setToolbarSubTitle(String subTitle) {
-//        mToolbarSubTitle.setText(subTitle);
-//        mToolbarSubTitle.setVisibility(subTitle.length() > 0 ? View.VISIBLE : View.GONE);
-//    }
 
 }

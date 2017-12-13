@@ -64,7 +64,6 @@ public class NewsFragment extends BaseFragment<NewsView, NewsPresenter>
 
         swipeRefresh.setColorSchemeColors(Color.RED, Color.BLUE, Color.GREEN);
         swipeRefresh.setOnRefreshListener(this);
-
         mNewsAdapter.setOnLoadMoreListener(this);
 
         onRefresh();
@@ -75,12 +74,10 @@ public class NewsFragment extends BaseFragment<NewsView, NewsPresenter>
         mPresenter.loadMoreData();
     }
 
-
     @Override
     public void onRefresh() {
         setDataRefresh(true);
         mPresenter.refreshData();
-
     }
 
     @Override

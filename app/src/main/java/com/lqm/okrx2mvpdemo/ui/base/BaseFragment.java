@@ -34,7 +34,6 @@ public abstract class BaseFragment<V, T extends BasePresenter<V>> extends Fragme
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        //子类不再需要设置布局ID，也不再需要使用ButterKnife.bind()
         View rootView = inflater.inflate(provideContentViewId(), container, false);
         ButterKnife.bind(this, rootView);
         initView(rootView);
